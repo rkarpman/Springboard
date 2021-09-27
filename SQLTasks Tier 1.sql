@@ -73,7 +73,7 @@ who signed up. Try not to use the LIMIT clause for your solution. */
 
 SELECT * FROM Members
 WHERE joindate IN
-SELECT MAX(joindate) FROM Members;
+    SELECT MAX(joindate) FROM Members;
 
 /* Q7: Produce a list of all members who have used a tennis court.
 Include in your output the name of the court, and the name of the member
@@ -151,8 +151,8 @@ The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
 
 SELECT
-        facname,
-        ROUND(revenue, 2)
+    facname,
+    ROUND(revenue, 2)
     FROM 
     (SELECT f.name as facname,
     SUM(CASE 
@@ -175,11 +175,11 @@ ORDER BY revenue DESC;
         WHEN l.recommendedby > 0 THEN r.firstname || ' ' || r.surname
         ELSE 'None' 
     END AS recommender
-    FROM Members AS l
-    LEFT JOIN Members AS r
-    ON l.recommendedby = r.memid
-    WHERE l.memid > 0
-    ORDER BY l.surname, l.firstname;
+FROM Members AS l
+LEFT JOIN Members AS r
+ON l.recommendedby = r.memid
+WHERE l.memid > 0
+ORDER BY l.surname, l.firstname;
     
 /* Q12: Find the facilities with their usage by member, but not guests */
 SELECT f.name,
@@ -193,8 +193,8 @@ GROUP BY f.facid
 /* Q13: Find the facilities usage by month, but not guests */
 
 SELECT f.name,
-        substr(b.starttime, 6, 2) as month,
-        sum(b.slots)
+    substr(b.starttime, 6, 2) as month,
+    sum(b.slots)
 FROM Facilities as f 
 INNER JOIN Bookings as b
 ON f.facid = b.facid
